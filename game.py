@@ -69,6 +69,7 @@ def stats():
     print("Attack:", player.user.attack)
     print("Weapon:", player.user.weapon.name)
     print("Waves done:", player.user.waves)
+    print("Gold:", player.user.gold)
     input("")
     intro()
 
@@ -119,6 +120,7 @@ def win():
     print("You won the battle")
     player.user.waves = player.user.waves + 1
     enemy.health = enemy.maxhealth
+    player.user.gold = player.user.gold + enemy.gold
     input(' ')
     intro()
 

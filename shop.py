@@ -13,6 +13,7 @@ def shop1():
     for wep in weapons.weaponlist:
         if wep == player.user.weapon and option == wep.weapon_id:
             print("You have already bought this item")
+            input("")
             shop1()
         elif wep.weapon_id == option and player.user.gold >= wep.gold:
             print(wep.name + " purchased")
@@ -20,4 +21,5 @@ def shop1():
             print("You currently have", player.user.gold, "Gold left")
             player.user.weapon = wep
             player.user.attack = wep.attack
+            input()
             return
