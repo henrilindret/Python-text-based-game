@@ -1,11 +1,11 @@
 import sys
 import random
+import pickle
 import os
 import weapons
 import enemies
 import shop
 import player
-from player import user
 
 
 # wave system.
@@ -24,7 +24,13 @@ def main():
     if option == "1":
         start()
     elif option == "2":
-        load()
+        if os.path.exists("savefile") == True:
+            with open('savefile', 'rb') as f:
+                global user
+                user = pickle.load(f)
+            print("Loaded Save State...")
+            option = input('')
+            intro()
     elif option == "3":
         sys.exit()
     else:
@@ -34,7 +40,9 @@ def main():
 def start():
     os.system('cls')
     print("What is your name?")
-    player.user.name = input("")
+    name = input()
+    global user
+    user = player.Player(name)
     intro()
 
 
@@ -45,7 +53,8 @@ def intro():
         print("1.) Fight")
         print("2.) Shop")
         print("3.) Stats")
-        print("4.) Exit")
+        print("4.) Save")
+        print("5.) Exit")
         option = input("-> ")
         if option == "1":
             fight()
@@ -54,6 +63,13 @@ def intro():
         elif option == "3":
             stats()
         elif option == "4":
+            with open('savefile', 'wb') as f:
+                global user
+                pickle.dump(user, f)
+                print("Game has been saved!")
+            option = input('')
+            intro()
+        elif option == "5":
             sys.exit()
 
 
