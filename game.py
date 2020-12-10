@@ -8,9 +8,6 @@ import shop
 import player
 
 
-# wave system.
-w = 0
-
 # Future code plan, defense/armor reduces attack power. so if you have 5 defense then it will reduce attack by 2.
 
 
@@ -78,13 +75,14 @@ def stats():
     print("Health:", user.health)
     print("Attack:", user.attack)
     print("Weapon:", user.weapon.name)
+    print("Waves done:", user.waves)
     input("")
     intro()
 
 
 def fight():
     global enemy
-    while w <= 5:
+    while user.waves <= 5:
         enemyencounter = random.choice(enemies.enemylist1)
         enemy = enemyencounter
         print("You explore until you encounter an", enemy.name)
@@ -126,8 +124,7 @@ def Combat():
 
 def win():
     print("You won the battle")
-    global w
-    w = w + 1
+    user.waves = user.waves + 1
     enemy.health = enemy.maxhealth
     input(' ')
     intro()
