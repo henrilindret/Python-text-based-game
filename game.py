@@ -8,9 +8,6 @@ import shop
 import player
 
 
-# Future code plan, defense/armor reduces attack power. so if you have 5 defense then it will reduce attack by 2.
-
-
 def main():
     os.system('cls')
     print("Welcome to the dungeon")
@@ -23,8 +20,7 @@ def main():
     elif option == "2":
         if os.path.exists("savefile") == True:
             with open('savefile', 'rb') as f:
-                global user
-                user = pickle.load(f)
+                player.user = pickle.load(f)
             print("Loaded Save State...")
             option = input('')
             intro()
@@ -37,9 +33,7 @@ def main():
 def start():
     os.system('cls')
     print("What is your name?")
-    name = input()
-    global user
-    user = player.Player(name)
+    player.user.name = input("")
     intro()
 
 
@@ -61,8 +55,7 @@ def intro():
             stats()
         elif option == "4":
             with open('savefile', 'wb') as f:
-                global user
-                pickle.dump(user, f)
+                pickle.dump(player.user, f)
                 print("Game has been saved!")
             option = input('')
             intro()
@@ -71,18 +64,18 @@ def intro():
 
 
 def stats():
-    print("Name:", user.name)
-    print("Health:", user.health)
-    print("Attack:", user.attack)
-    print("Weapon:", user.weapon.name)
-    print("Waves done:", user.waves)
+    print("Name:", player.user.name)
+    print("Health:", player.user.health)
+    print("Attack:", player.user.attack)
+    print("Weapon:", player.user.weapon.name)
+    print("Waves done:", player.user.waves)
     input("")
     intro()
 
 
 def fight():
     global enemy
-    while user.waves <= 5:
+    while player.user.waves <= 5:
         enemyencounter = random.choice(enemies.enemylist1)
         enemy = enemyencounter
         print("You explore until you encounter an", enemy.name)
@@ -99,9 +92,9 @@ def fight():
 
 def Combat():
     # Opponent miss and hit system very basic
-    userdamage = random.randint(user.attack // 2, user.attack)
+    userdamage = random.randint(player.user.attack // 2, player.user.attack)
     enemydamage = random.randint(enemy.attack // 2, enemy.attack)
-    if userdamage == user.attack // 2:
+    if userdamage == player.user.attack // 2:
         print("You missed")
     else:
         print(enemy.health)
@@ -113,10 +106,10 @@ def Combat():
     if enemydamage == enemy.attack // 2:
         print("The enemy missed their attack")
     else:
-        user.health -= enemydamage
+        player.user.health -= enemydamage
         print(enemy.name, "hit you for", enemydamage)
     input(' ')
-    if user.health <= 0:
+    if player.user.health <= 0:
         dead()
     else:
         Combat()
@@ -124,7 +117,7 @@ def Combat():
 
 def win():
     print("You won the battle")
-    user.waves = user.waves + 1
+    player.user.waves = player.user.waves + 1
     enemy.health = enemy.maxhealth
     input(' ')
     intro()
