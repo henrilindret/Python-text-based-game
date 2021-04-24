@@ -7,7 +7,7 @@ import enemies
 import shop
 import player
 
-#test2
+
 
 def main():
     os.system('cls')
