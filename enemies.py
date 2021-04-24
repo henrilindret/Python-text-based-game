@@ -7,8 +7,8 @@ class Enemy:
         self.gold = gold
 
 
-Goblin = Enemy("Goblin", 20, 20, 2, 50)
-Zombie = Enemy("Zombie", 20, 20, 2, 30)
+Goblin = Enemy("Goblin", 20, 20, 10, 50)
+Zombie = Enemy("Zombie", 20, 20, 10, 30)
 
 
 enemylist1 = [Goblin, Zombie]

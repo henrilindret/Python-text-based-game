@@ -1,6 +1,7 @@
-__pycache__/enemies.cpython-38.pyc
-__pycache__/player.cpython-38.pyc
-__pycache__/shop.cpython-38.pyc
-__pycache__/weapons.cpython-38.pyc
+__pycache__/enemies.cpython-39.pyc
+__pycache__/player.cpython-39.pyc
+__pycache__/shop.cpython-39.pyc
+__pycache__/weapons.cpython-39.pyc
 savefile
-__pycache__/game.cpython-38.pyc
+__pycache__/game.cpython-39.pyc
+__pycache__/armor.cpython-39.pyc

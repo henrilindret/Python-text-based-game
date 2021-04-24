@@ -7,6 +7,7 @@ import enemies
 import shop
 import player
 
+#test2
 
 def main():
     os.system('cls')
@@ -34,6 +35,17 @@ def start():
     os.system('cls')
     print("What is your name?")
     player.user.name = input("")
+    print("What is your talent?")
+    print("Warrior")
+    print("Paladin")
+    talent = input("")
+    if talent == "1":
+        player.user.talent = player.warrior.name
+        player.user.attack = player.user.weapon.attack + player.warrior.attack
+        player.user.maxhealth = player.warrior.maxhealth
+        player.user.health = player.warrior.health
+    else:
+        print("yes")
     intro()
 
 
@@ -45,7 +57,8 @@ def intro():
         print("2.) Shop")
         print("3.) Stats")
         print("4.) Save")
-        print("5.) Exit")
+        print("5.) Rest")
+        print("6.) Exit")
         option = input("-> ")
         if option == "1":
             fight()
@@ -59,14 +72,31 @@ def intro():
                 print("Game has been saved!")
             option = input('')
             intro()
-        elif option == "5":
+        elif option == "6":
             sys.exit()
+        elif option == "5":
+            healamount = random.randint(1, 10)
+            healing = player.user.health + healamount
+            if player.user.health == player.user.maxhealth:
+                print("You are at max hp and cannot heal")
+                input()
+            elif player.user.health < player.user.maxhealth: 
+                print("Healed you for", healamount, "hp")
+                player.user.health = healing
+                input()
+                if player.user.health > player.user.maxhealth:
+                    player.user.health = player.user.maxhealth
+
+
+
 
 
 def stats():
     print("Name:", player.user.name)
-    print("Health:", player.user.health)
+    print("Talent:", player.user.talent)
+    print("Health:", player.user.health, "/", player.user.maxhealth)
     print("Attack:", player.user.attack)
+    print("Armor:", player.user.armor)
     print("Weapon:", player.user.weapon.name)
     print("Waves done:", player.user.waves)
     print("Gold:", player.user.gold)
@@ -94,7 +124,7 @@ def fight():
 def Combat():
     # Opponent miss and hit system very basic
     userdamage = random.randint(player.user.attack // 2, player.user.attack)
-    enemydamage = random.randint(enemy.attack // 2, enemy.attack)
+    enemydamage = random.randint(enemy.attack // 2, enemy.attack) - random.randint(player.user.armor // 2, player.user.armor)
     if userdamage == player.user.attack // 2:
         print("You missed")
     else:
@@ -106,6 +136,8 @@ def Combat():
         win()
     if enemydamage == enemy.attack // 2:
         print("The enemy missed their attack")
+    elif enemydamage <= 0:
+        print("Your armor helped block")
     else:
         player.user.health -= enemydamage
         print(enemy.name, "hit you for", enemydamage)
