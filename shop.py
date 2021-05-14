@@ -7,7 +7,7 @@ def shop1():
     print("You currently have", player.user.gold, "Gold")
     print("The shop is currently selling")
     for wep in weapons.weaponlist:
-        print(wep.name, wep.gold)
+        print(wep.weapon_id, wep.name, wep.gold)
     print("What would you like to buy?")
     option = int(input())
     for wep in weapons.weaponlist:
@@ -23,3 +23,4 @@ def shop1():
             player.user.attack = wep.attack
             input()
             return
+            

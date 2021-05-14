@@ -7,6 +7,10 @@ class Enemy:
         self.gold = gold
 
 
+    def Attackdamage(self):
+        return self.attack
+
+
 Goblin = Enemy("Goblin", 20, 20, 10, 50)
 Zombie = Enemy("Zombie", 20, 20, 10, 30)
 

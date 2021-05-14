@@ -8,6 +8,8 @@ import shop
 import player
 
 
+restwaves = [2, 4, 6, 8]
+healed = 0
 
 def main():
     os.system('cls')
@@ -40,10 +42,7 @@ def start():
     print("Paladin")
     talent = input("")
     if talent == "1":
-        player.user.talent = player.warrior.name
-        player.user.attack = player.user.weapon.attack + player.warrior.attack
-        player.user.maxhealth = player.warrior.maxhealth
-        player.user.health = player.warrior.health
+        player.user.talent = player.talents["Warrior"]
     else:
         print("yes")
     intro()
@@ -74,18 +73,26 @@ def intro():
             intro()
         elif option == "6":
             sys.exit()
-        elif option == "5":
+        if option == "5" and player.user.waves in restwaves:
+            global healed
             healamount = random.randint(1, 10)
-            healing = player.user.health + healamount
-            if player.user.health == player.user.maxhealth:
+            healing = player.user.talent.health + healamount
+            if healed == 1:
+                print("you have already healed once")
+                input()
+            elif player.user.talent.health == player.user.talent.maxhealth:
                 print("You are at max hp and cannot heal")
                 input()
-            elif player.user.health < player.user.maxhealth: 
+            elif player.user.talent.health < player.user.talent.maxhealth: 
                 print("Healed you for", healamount, "hp")
-                player.user.health = healing
+                player.user.talent.health = healing
+                healed = healed + 1
                 input()
-                if player.user.health > player.user.maxhealth:
-                    player.user.health = player.user.maxhealth
+                if player.user.talent.health > player.user.talent.maxhealth:
+                    player.user.talent.health = player.user.talent.maxhealth
+        else:
+            print("You can not rest at the moment")
+            input()
 
 
 
@@ -93,15 +100,17 @@ def intro():
 
 def stats():
     print("Name:", player.user.name)
-    print("Talent:", player.user.talent)
-    print("Health:", player.user.health, "/", player.user.maxhealth)
-    print("Attack:", player.user.attack)
+    print("Talent:", player.user.talent.name)
+    print("Health:", player.user.talent.health, "/", player.user.talent.maxhealth)
+    print("Attack:", player.user.Attackdamage())
     print("Armor:", player.user.armor)
     print("Weapon:", player.user.weapon.name)
     print("Waves done:", player.user.waves)
     print("Gold:", player.user.gold)
     input("")
     intro()
+
+
 
 
 def fight():
@@ -123,9 +132,9 @@ def fight():
 
 def Combat():
     # Opponent miss and hit system very basic
-    userdamage = random.randint(player.user.attack // 2, player.user.attack)
+    userdamage = random.randint(player.user.Attackdamage() // 2, player.user.Attackdamage())
     enemydamage = random.randint(enemy.attack // 2, enemy.attack) - random.randint(player.user.armor // 2, player.user.armor)
-    if userdamage == player.user.attack // 2:
+    if userdamage == player.user.Attackdamage() // 2:
         print("You missed")
     else:
         print(enemy.health)
@@ -139,10 +148,10 @@ def Combat():
     elif enemydamage <= 0:
         print("Your armor helped block")
     else:
-        player.user.health -= enemydamage
+        player.user.talent.health -= enemydamage
         print(enemy.name, "hit you for", enemydamage)
     input(' ')
-    if player.user.health <= 0:
+    if player.user.talent.health <= 0:
         dead()
     else:
         Combat()
@@ -154,6 +163,8 @@ def win():
     enemy.health = enemy.maxhealth
     player.user.gold = player.user.gold + enemy.gold
     input(' ')
+    global healed
+    healed = 0
     intro()
 
 
