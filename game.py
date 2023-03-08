@@ -2,7 +2,6 @@ import sys
 import random
 import pickle
 import os
-import weapons
 import enemies
 import shop
 import player
@@ -41,8 +40,10 @@ def start():
     print("Warrior")
     print("Paladin")
     talent = input("")
-    if talent == "1":
+    if talent == "Warrior":
         player.user.talent = player.talents["Warrior"]
+    elif talent == "Paladin":
+        player.user.talent = player.talents["Paladin"]
     else:
         print("yes")
     intro()
@@ -90,9 +91,9 @@ def intro():
                 input()
                 if player.user.talent.health > player.user.talent.maxhealth:
                     player.user.talent.health = player.user.talent.maxhealth
-        else:
-            print("You can not rest at the moment")
-            input()
+        elif option == "5" and player.user.waves != restwaves:
+            print("You cannot rest right now")
+            input("")
 
 
 
