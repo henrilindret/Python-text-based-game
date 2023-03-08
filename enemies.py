@@ -11,8 +11,8 @@ class Enemy:
         return self.attack
 
 
-Goblin = Enemy("Goblin", 20, 20, 10, 50)
-Zombie = Enemy("Zombie", 20, 20, 10, 30)
+Goblin = Enemy("Goblin", 20, 20, 10, 5)
+Zombie = Enemy("Zombie", 20, 20, 10, 5)
 
 
 enemylist1 = [Goblin, Zombie]

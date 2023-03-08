@@ -5,7 +5,7 @@ import os
 import enemies
 import shop
 import player
-
+import spells
 
 restwaves = [2, 4, 6, 8]
 healed = 0
@@ -36,6 +36,10 @@ def start():
     os.system('cls')
     print("What is your name?")
     player.user.name = input("")
+    talentpick()
+
+
+def talentpick():
     print("What is your talent?")
     print("Warrior")
     print("Paladin")
@@ -44,10 +48,14 @@ def start():
         player.user.talent = player.talents["Warrior"]
     elif talent == "Paladin":
         player.user.talent = player.talents["Paladin"]
-    else:
-        print("yes")
+    elif talent != "Warrior" or "Paladin":
+        print("You have not chosen a talent, do you wish to have no talent?")
+        decision = input("")
+        if decision == "yes":
+            player.user.talent = player.talents["Normal"]
+        elif decision == "no" or "" or " ":
+            talentpick()
     intro()
-
 
 def intro():
     while True:
@@ -103,6 +111,7 @@ def stats():
     print("Name:", player.user.name)
     print("Talent:", player.user.talent.name)
     print("Health:", player.user.talent.health, "/", player.user.talent.maxhealth)
+    print("Talent:", player.user.talent.manatalent)
     print("Attack:", player.user.Attackdamage())
     print("Armor:", player.user.armor)
     print("Weapon:", player.user.weapon.name)
@@ -122,13 +131,60 @@ def fight():
         print("You explore until you encounter an", enemy.name)
         print("What would you like to do?")
         print("1.) Attack")
-        print("2.) Run away")
+        print("2.) Use spell")
+        print("3.) Run away")
         option = input("-> ")
         if option == "1":
             Combat()
+        elif option == "2":
+            ManaCombat()
         else:
             intro()
     fight2()
+
+
+
+# WIP (bugged)
+def ManaCombat():
+    for ability in spells.spelllist:
+        if ability.spell_id == player.user.talent.manatalent:
+            print(ability.spell_id, ability.name, "Mana cost:", ability.manacost, "Damage:", ability.damage)
+    print("What ability do you wish to use?")
+    spellchoice = int(input(""))
+    if spellchoice == ability.spell_id:
+        print("You shoot a", ability.name, "at",  enemy.name, "dealing", ability.damage)
+        enemy.health = enemy.health - ability.damage
+        if enemy.health <= 0:
+            win()
+        elif enemy.health >= 0:
+            print("The enemy survived the blast and charges at you")
+            userdamage = random.randint(player.user.Attackdamage() // 2, player.user.Attackdamage())
+            enemydamage = random.randint(enemy.attack // 2, enemy.attack) - random.randint(player.user.armor // 2, player.user.armor)
+            if userdamage == player.user.Attackdamage() // 2:
+                print("You missed")
+            else:
+                print("the enemy has", enemy.health, "health remaining")
+                print("You hit", enemy.name, "for", userdamage)
+                enemy.health = enemy.health - userdamage
+                input(' ')
+            if enemy.health <= 0:
+                win()
+            if enemydamage == enemy.attack // 2:
+                print("The enemy missed their attack")
+            elif enemydamage <= 0:
+                print("Your armor helped block")
+            else:
+                player.user.talent.health -= enemydamage
+                print(enemy.name, "hit you for", enemydamage)
+                input(' ')
+            if player.user.talent.health <= 0:
+                dead()
+            else:
+             Combat()
+
+
+
+
 
 
 def Combat():
