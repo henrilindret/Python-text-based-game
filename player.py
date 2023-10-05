@@ -15,6 +15,7 @@ class Player:
         self.basedamage = 3
         self.armor = armor.Cloth.armor
         self.waves = 0
+        self.rest = 0
 
     
     def Attackdamage(self):

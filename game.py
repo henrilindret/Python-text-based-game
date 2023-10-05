@@ -7,11 +7,12 @@ import shop
 import player
 import spells
 
-restwaves = [2, 4, 6, 8]
+restwaves = [2]
 healed = 0
 
+
 def main():
-    os.system('cls')
+    os.system("cls")
     print("Welcome to the dungeon")
     print("1.) Start")
     print("2.) Load")
@@ -21,10 +22,10 @@ def main():
         start()
     elif option == "2":
         if os.path.exists("savefile") == True:
-            with open('savefile', 'rb') as f:
+            with open("savefile", "rb") as f:
                 player.user = pickle.load(f)
             print("Loaded Save State...")
-            option = input('')
+            option = input("")
             intro()
     elif option == "3":
         sys.exit()
@@ -33,7 +34,7 @@ def main():
 
 
 def start():
-    os.system('cls')
+    os.system("cls")
     print("What is your name?")
     player.user.name = input("")
     talentpick()
@@ -57,9 +58,10 @@ def talentpick():
             talentpick()
     intro()
 
+
 def intro():
     while True:
-        os.system('cls')
+        os.system("cls")
         print("Would you like to")
         print("1.) Fight")
         print("2.) Shop")
@@ -75,10 +77,10 @@ def intro():
         elif option == "3":
             stats()
         elif option == "4":
-            with open('savefile', 'wb') as f:
+            with open("savefile", "wb") as f:
                 pickle.dump(player.user, f)
                 print("Game has been saved!")
-            option = input('')
+            option = input("")
             intro()
         elif option == "6":
             sys.exit()
@@ -92,26 +94,26 @@ def intro():
             elif player.user.talent.health == player.user.talent.maxhealth:
                 print("You are at max hp and cannot heal")
                 input()
-            elif player.user.talent.health < player.user.talent.maxhealth: 
+            elif player.user.talent.health < player.user.talent.maxhealth:
                 print("Healed you for", healamount, "hp")
                 player.user.talent.health = healing
                 healed = healed + 1
                 input()
                 if player.user.talent.health > player.user.talent.maxhealth:
                     player.user.talent.health = player.user.talent.maxhealth
+            elif player.user.rest > restwaves:
+                player.user.rest = 0
+                print("You cannot rest right now katseee")
         elif option == "5" and player.user.waves != restwaves:
             print("You cannot rest right now")
             input("")
-
-
-
 
 
 def stats():
     print("Name:", player.user.name)
     print("Talent:", player.user.talent.name)
     print("Health:", player.user.talent.health, "/", player.user.talent.maxhealth)
-    print("Talent:", player.user.talent.manatalent)
+    print("ManaTalent:", player.user.talent.manatalent)
     print("Attack:", player.user.Attackdamage())
     print("Armor:", player.user.armor)
     print("Weapon:", player.user.weapon.name)
@@ -119,8 +121,6 @@ def stats():
     print("Gold:", player.user.gold)
     input("")
     intro()
-
-
 
 
 def fight():
@@ -143,30 +143,57 @@ def fight():
     fight2()
 
 
+def fightcontin():
+    global enemy
+    print("Do you wish to continue fighting", enemy.name)
+    print("What would you like to do?")
+    print("1.) Attack")
+    print("2.) Use spell")
+    print("3.) Use Item")
+    print("4.) Run away")
+    option = input("-> ")
+    if option == "1":
+        Combat()
+    elif option == "2":
+        ManaCombat()
+    else:
+        intro()
+
 
 # WIP (bugged)
 def ManaCombat():
     for ability in spells.spelllist:
         if ability.spell_id == player.user.talent.manatalent:
-            print(ability.spell_id, ability.name, "Mana cost:", ability.manacost, "Damage:", ability.damage)
+            print(
+                ability.spell_id,
+                ability.name,
+                "Mana cost:",
+                ability.manacost,
+                "Damage:",
+                ability.damage,
+            )
     print("What ability do you wish to use?")
     spellchoice = int(input(""))
     if spellchoice == ability.spell_id:
-        print("You shoot a", ability.name, "at",  enemy.name, "dealing", ability.damage)
+        print("You shoot a", ability.name, "at", enemy.name, "dealing", ability.damage)
         enemy.health = enemy.health - ability.damage
         if enemy.health <= 0:
             win()
         elif enemy.health >= 0:
             print("The enemy survived the blast and charges at you")
-            userdamage = random.randint(player.user.Attackdamage() // 2, player.user.Attackdamage())
-            enemydamage = random.randint(enemy.attack // 2, enemy.attack) - random.randint(player.user.armor // 2, player.user.armor)
+            userdamage = random.randint(
+                player.user.Attackdamage() // 2, player.user.Attackdamage()
+            )
+            enemydamage = random.randint(
+                enemy.attack // 2, enemy.attack
+            ) - random.randint(player.user.armor // 2, player.user.armor)
             if userdamage == player.user.Attackdamage() // 2:
                 print("You missed")
             else:
                 print("the enemy has", enemy.health, "health remaining")
                 print("You hit", enemy.name, "for", userdamage)
                 enemy.health = enemy.health - userdamage
-                input(' ')
+                input(" ")
             if enemy.health <= 0:
                 win()
             if enemydamage == enemy.attack // 2:
@@ -176,28 +203,28 @@ def ManaCombat():
             else:
                 player.user.talent.health -= enemydamage
                 print(enemy.name, "hit you for", enemydamage)
-                input(' ')
+                input(" ")
             if player.user.talent.health <= 0:
                 dead()
             else:
-             Combat()
-
-
-
-
+                fightcontin()
 
 
 def Combat():
     # Opponent miss and hit system very basic
-    userdamage = random.randint(player.user.Attackdamage() // 2, player.user.Attackdamage())
-    enemydamage = random.randint(enemy.attack // 2, enemy.attack) - random.randint(player.user.armor // 2, player.user.armor)
+    userdamage = random.randint(
+        player.user.Attackdamage() // 2, player.user.Attackdamage()
+    )
+    enemydamage = random.randint(enemy.attack // 2, enemy.attack) - random.randint(
+        player.user.armor // 2, player.user.armor
+    )
     if userdamage == player.user.Attackdamage() // 2:
         print("You missed")
     else:
         print(enemy.health)
         print("You hit", enemy.name, "for", userdamage)
         enemy.health = enemy.health - userdamage
-    input(' ')
+    input(" ")
     if enemy.health <= 0:
         win()
     if enemydamage == enemy.attack // 2:
@@ -207,11 +234,11 @@ def Combat():
     else:
         player.user.talent.health -= enemydamage
         print(enemy.name, "hit you for", enemydamage)
-    input(' ')
+    input(" ")
     if player.user.talent.health <= 0:
         dead()
     else:
-        Combat()
+        fightcontin()
 
 
 def win():
@@ -219,7 +246,7 @@ def win():
     player.user.waves = player.user.waves + 1
     enemy.health = enemy.maxhealth
     player.user.gold = player.user.gold + enemy.gold
-    input(' ')
+    input(" ")
     global healed
     healed = 0
     intro()
