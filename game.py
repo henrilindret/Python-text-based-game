@@ -7,7 +7,7 @@ import shop
 import player
 import spells
 
-restwaves = [2]
+
 healed = 0
 
 
@@ -84,7 +84,7 @@ def intro():
             intro()
         elif option == "6":
             sys.exit()
-        if option == "5" and player.user.waves in restwaves:
+        if option == "5" and player.user.waves % 3 == 0:
             global healed
             healamount = random.randint(1, 10)
             healing = player.user.talent.health + healamount
@@ -101,10 +101,7 @@ def intro():
                 input()
                 if player.user.talent.health > player.user.talent.maxhealth:
                     player.user.talent.health = player.user.talent.maxhealth
-            elif player.user.rest > restwaves:
-                player.user.rest = 0
-                print("You cannot rest right now katseee")
-        elif option == "5" and player.user.waves != restwaves:
+        elif option == "5":
             print("You cannot rest right now")
             input("")
 
@@ -125,22 +122,20 @@ def stats():
 
 def fight():
     global enemy
-    while player.user.waves <= 5:
-        enemyencounter = random.choice(enemies.enemylist1)
-        enemy = enemyencounter
-        print("You explore until you encounter an", enemy.name)
-        print("What would you like to do?")
-        print("1.) Attack")
-        print("2.) Use spell")
-        print("3.) Run away")
-        option = input("-> ")
-        if option == "1":
-            Combat()
-        elif option == "2":
-            ManaCombat()
-        else:
-            intro()
-    fight2()
+    enemyencounter = random.choice(enemies.enemylist1)
+    enemy = enemyencounter
+    print("You explore until you encounter an", enemy.name)
+    print("What would you like to do?")
+    print("1.) Attack")
+    print("2.) Use spell")
+    print("3.) Run away")
+    option = input("-> ")
+    if option == "1":
+        Combat()
+    elif option == "2":
+        ManaCombat()
+    else:
+        intro()
 
 
 def fightcontin():

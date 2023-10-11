@@ -28,7 +28,7 @@ def shop1():
             player.user.gold = player.user.gold - wep.gold
             print("You currently have", player.user.gold, "Gold left")
             player.user.weapon = wep
-            player.user.attack = wep.attack
+            player.user.weapondamage = wep.attack
             input("")
             shop1()
         elif wep.weapon_id == option and player.user.gold <= wep.gold:
