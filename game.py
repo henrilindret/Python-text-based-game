@@ -108,6 +108,7 @@ def intro():
 
 def stats():
     print("Name:", player.user.name)
+    print("Experience:", player.user.exp)
     print("Talent:", player.user.talent.name)
     print("Health:", player.user.talent.health, "/", player.user.talent.maxhealth)
     print("ManaTalent:", player.user.talent.manatalent)
@@ -241,7 +242,15 @@ def win():
     player.user.waves = player.user.waves + 1
     enemy.health = enemy.maxhealth
     player.user.gold = player.user.gold + enemy.gold
+    player.user.exp = player.user.exp + enemy.exp
     input(" ")
+    current_talent = player.user.talent.name
+    if player.user.exp >= 100 and current_talent in player.talents:
+        level_up = player.talents[current_talent].levelup
+        player.talents[current_talent].maxhealth += level_up["maxhealth"]
+        player.user.basedamage += level_up["basedamage"]
+        player.user.exp = 0
+        print("Congratulations, you leveled up!")
     global healed
     healed = 0
     intro()
