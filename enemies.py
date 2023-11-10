@@ -13,6 +13,9 @@ class Enemy:
         return self.attack
 
 
+
+
+
 Wolf = Enemy("Wolf", 20, 20, 3, 2, 5, 3,)
 Troll = Enemy("Troll", 30, 30, 10, 0, 5, 10,)
 Goblin = Enemy("Goblin", 10, 10, 2, 1, 5, 2,)

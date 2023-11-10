@@ -25,6 +25,8 @@ class Player:
         return self.basedamage + self.weapondamage + self.talent.attack
     
 
+    
+
 class Talent:
     def __init__(self, name, attack, maxhealth, health, mana, manatalent, levelup):
         self.name = name

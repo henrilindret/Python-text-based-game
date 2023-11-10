@@ -19,7 +19,6 @@ def shop1():
             print("Please enter a valid number")
             input()
             shop1()
-            return
         for wep in weapons.weaponlist:
             if wep == player.user.weapon and option == wep.weapon_id:
                 print("You have already bought this item")
