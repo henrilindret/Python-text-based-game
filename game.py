@@ -5,11 +5,11 @@ import os
 import enemies
 import shop
 import player
-
-
+import loot
 
 healed = 0
 
+###########Start/talent############################
 
 def main():
     os.system("cls")
@@ -58,12 +58,15 @@ def talentpick():
             talentpick()
     intro()
 
+###########Start/talent############################
+
 
 def intro():
     while True:
         os.system("cls")
-        print("Would you like to")
-        print("1.) Fight")
+        player.user.zone = "City"
+        print("You arrive in the city of Karshrad, Would you like to")
+        print("1.) Go outside the city")
         print("2.) Shop")
         print("3.) Stats")
         print("4.) Save")
@@ -71,7 +74,7 @@ def intro():
         print("6.) Exit")
         option = input("-> ")
         if option == "1":
-            Arrival()
+            zonepick()
         elif option == "2":
             shop.shop1()
         elif option == "3":
@@ -118,6 +121,7 @@ def stats():
     print("Weapon:", player.user.weapon.name)
     print("Waves done:", player.user.waves)
     print("Gold:", player.user.gold)
+    print("Current Zone:", player.user.zone)
     input("")
     intro()
     
@@ -127,7 +131,7 @@ def stats():
 
 def fight():
     global enemy
-    enemyencounter = random.choice(enemies.enemylist1)
+    enemyencounter = random.choice(enemies.forestenemylist)
     enemy = enemyencounter
     print("you encounter an", enemy.name)
     print("What would you like to do?")
@@ -142,6 +146,20 @@ def fight():
     else:
         intro()
 
+def fightcontin():
+    print("Do you wish to continue fighting", enemy.name)
+    print("What would you like to do?")
+    print("1.) Attack")
+    print("2.) Use spell")
+    print("3.) Use Item")
+    print("4.) Run away")
+    option = input("-> ")
+    if option == "1":
+        Combat()
+    elif option == "2":
+        print("no")
+    else:
+        intro()
 
 
 def Combat():
@@ -173,29 +191,14 @@ def Combat():
     else:
         fightcontin()
 
-def fightcontin():
-    global enemy
-    print("Do you wish to continue fighting", enemy.name)
-    print("What would you like to do?")
-    print("1.) Attack")
-    print("2.) Use spell")
-    print("3.) Use Item")
-    print("4.) Run away")
-    option = input("-> ")
-    if option == "1":
-        Combat()
-    elif option == "2":
-        print("no")
-    else:
-        intro()
 
+#########Win area####################
 def win():
     print("You won the battle")
     player.user.waves = player.user.waves + 1
     enemy.health = enemy.maxhealth
     player.user.gold = player.user.gold + enemy.gold
     player.user.exp = player.user.exp + enemy.exp
-    input(" ")
     current_talent = player.user.talent.name
     if player.user.exp >= 100 and current_talent in player.talents:
         level_up = player.talents[current_talent].levelup
@@ -203,10 +206,18 @@ def win():
         player.user.basedamage += level_up["basedamage"]
         player.user.exp = 0
         print("Congratulations, you leveled up!")
+    if player.user.zone == "Forest":
+        Arriveforest()
+    elif player.user.zone == "Desert":
+        Arriveforest()
+    elif player.user.zone == "City":
+        print("how are you here?")  
     global healed
     healed = 0
-    intro()
-
+    
+    
+    
+#########Win area####################
 
 def dead():
     print("You have died")
@@ -225,9 +236,22 @@ def dead():
 
 ##############Zone Area################################
 
-forestenemies = enemies.forestenemylist
+def zonepick():
+    print("Outside the city you have different zones you can go to")
+    print("1.) Forest")
+    print("2.) Desert")
+    option = input("")
+    if option == "1":
+        player.user.zone = "Forest"
+        print("You decide to go to the forest")
+        Arriveforest()
+    elif option == "2":
+        player.user.zone = "Desert"
+        print("You decide to go to the desert")
+        zonepick()
 
-def Arrival():
+
+def Arriveforest():
     print("You arrive at a safespot in the forest")
     print("In the Forest you can")
     print("1.) Explore")
@@ -247,7 +271,7 @@ def Arrival():
             pickle.dump(player.user, f)
             print("Game has been saved!")
         option = input("")
-        Arrival()
+        Arriveforest()
     elif option == "5":
         return    
     
@@ -265,7 +289,7 @@ def Explore():
         print("1.) Drink it")
         print("2.) Rest near it")
         print("3.) Ignore it and leave")
-        Explore()
+        Arriveforest()
         
 
 ##############Zone Area################################

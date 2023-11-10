@@ -17,6 +17,7 @@ class Player:
         self.rest = 0
         self.level = 0
         self.exp = 0
+        self.zone = ""
         
 
     
