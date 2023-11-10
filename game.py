@@ -5,7 +5,7 @@ import os
 import enemies
 import shop
 import player
-import spells
+
 
 
 healed = 0
@@ -71,7 +71,7 @@ def intro():
         print("6.) Exit")
         option = input("-> ")
         if option == "1":
-            fight()
+            Arrival()
         elif option == "2":
             shop.shop1()
         elif option == "3":
@@ -105,6 +105,7 @@ def intro():
             print("You cannot rest right now")
             input("")
 
+##############Stats#####################################
 
 def stats():
     print("Name:", player.user.name)
@@ -119,13 +120,16 @@ def stats():
     print("Gold:", player.user.gold)
     input("")
     intro()
+    
+##############Stats#####################################
 
+##############Combat Area################################
 
 def fight():
     global enemy
     enemyencounter = random.choice(enemies.enemylist1)
     enemy = enemyencounter
-    print("You explore until you encounter an", enemy.name)
+    print("you encounter an", enemy.name)
     print("What would you like to do?")
     print("1.) Attack")
     print("2.) Use spell")
@@ -134,80 +138,13 @@ def fight():
     if option == "1":
         Combat()
     elif option == "2":
-        ManaCombat()
+        print("no")
     else:
         intro()
 
-
-def fightcontin():
-    global enemy
-    print("Do you wish to continue fighting", enemy.name)
-    print("What would you like to do?")
-    print("1.) Attack")
-    print("2.) Use spell")
-    print("3.) Use Item")
-    print("4.) Run away")
-    option = input("-> ")
-    if option == "1":
-        Combat()
-    elif option == "2":
-        ManaCombat()
-    else:
-        intro()
-
-
-# WIP (bugged)
-def ManaCombat():
-    for ability in spells.spelllist:
-        if ability.spell_id == player.user.talent.manatalent:
-            print(
-                ability.spell_id,
-                ability.name,
-                "Mana cost:",
-                ability.manacost,
-                "Damage:",
-                ability.damage,
-            )
-    print("What ability do you wish to use?")
-    spellchoice = int(input(""))
-    if spellchoice == ability.spell_id:
-        print("You shoot a", ability.name, "at", enemy.name, "dealing", ability.damage)
-        enemy.health = enemy.health - ability.damage
-        if enemy.health <= 0:
-            win()
-        elif enemy.health >= 0:
-            print("The enemy survived the blast and charges at you")
-            userdamage = random.randint(
-                player.user.Attackdamage() // 2, player.user.Attackdamage()
-            )
-            enemydamage = random.randint(
-                enemy.attack // 2, enemy.attack
-            ) - random.randint(player.user.armor // 2, player.user.armor)
-            if userdamage == player.user.Attackdamage() // 2:
-                print("You missed")
-            else:
-                print("the enemy has", enemy.health, "health remaining")
-                print("You hit", enemy.name, "for", userdamage)
-                enemy.health = enemy.health - userdamage
-                input(" ")
-            if enemy.health <= 0:
-                win()
-            if enemydamage == enemy.attack // 2:
-                print("The enemy missed their attack")
-            elif enemydamage <= 0:
-                print("Your armor helped block")
-            else:
-                player.user.talent.health -= enemydamage
-                print(enemy.name, "hit you for", enemydamage)
-                input(" ")
-            if player.user.talent.health <= 0:
-                dead()
-            else:
-                fightcontin()
 
 
 def Combat():
-    # Opponent miss and hit system very basic
     userdamage = random.randint(
         player.user.Attackdamage() // 2, player.user.Attackdamage()
     )
@@ -236,6 +173,21 @@ def Combat():
     else:
         fightcontin()
 
+def fightcontin():
+    global enemy
+    print("Do you wish to continue fighting", enemy.name)
+    print("What would you like to do?")
+    print("1.) Attack")
+    print("2.) Use spell")
+    print("3.) Use Item")
+    print("4.) Run away")
+    option = input("-> ")
+    if option == "1":
+        Combat()
+    elif option == "2":
+        print("no")
+    else:
+        intro()
 
 def win():
     print("You won the battle")
@@ -269,9 +221,63 @@ def dead():
     else:
         dead()
 
+##############Combat Area################################
 
-def fight2():
-    print("New wave")
+##############Zone Area################################
+
+forestenemies = enemies.forestenemylist
+
+def Arrival():
+    print("You arrive at a safespot in the forest")
+    print("In the Forest you can")
+    print("1.) Explore")
+    print("2.) Rest")
+    print("3.) Stats")
+    print("4.) Save")
+    print("5.) Return")
+    option = input("-> ")
+    if option == "1":
+        Explore()
+    elif option == "2":
+        print("rest")
+    elif option == "3":
+        stats()
+    elif option == "4":
+        with open("savefile", "wb") as f:
+            pickle.dump(player.user, f)
+            print("Game has been saved!")
+        option = input("")
+        Arrival()
+    elif option == "5":
+        return    
+    
+def Explore():
+    print("You decide to explore around")
+    Event = random.randint(1, 100)
+    if Event >= 10:
+        print("You spot something running at you")
+        print("Battle")
+        input()
+        fight()
+    else:
+        print("While exploring you found a holy spring")
+        print("You decide to")
+        print("1.) Drink it")
+        print("2.) Rest near it")
+        print("3.) Ignore it and leave")
+        Explore()
+        
+
+##############Zone Area################################
+
+
+
+
+
+
+
+
+
 
 
 main()

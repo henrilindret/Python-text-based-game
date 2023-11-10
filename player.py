@@ -1,6 +1,5 @@
 import weapons
 import armor
-import spells
 
 
 class Player:
@@ -9,7 +8,7 @@ class Player:
         self.talent = talents["Normal"]
         self.maxhealth = self.talent.maxhealth
         self.health = self.talent.health
-        self.gold = 0
+        self.gold = 50
         self.weapon = weapons.Ironsword
         self.weapondamage = self.weapon.attack
         self.basedamage = 3
