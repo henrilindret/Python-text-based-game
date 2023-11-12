@@ -8,12 +8,13 @@ def shop1():
     print("Do you wish to check weapons or armor?")
     shoptype = input()
     
-    if shoptype == "weapon":
-        print("The shop is currently selling")
+    if shoptype.lower() in ["weapon", "weapons"]:
+        print("The shop is currently selling:")
         for wep in weapons.weaponlist:
-            print(wep.weapon_id, wep.name, "cost", wep.gold)
+            print(wep.weapon_id, wep.name, ": cost", wep.gold)
+        print()
         print("What would you like to buy?")
-        print("If you wish to leave, write 5")
+        print("If you wish to leave, write '100'")
         
         try:
             option = int(input())
@@ -39,15 +40,15 @@ def shop1():
                 print("You do not have enough money to buy the weapon")
                 input("")
                 shop1()
-            elif option == "5":
+            elif option == "100":
                 return
     
-    elif shoptype == "armor":
-        print("The shop is currently selling")
+    elif shoptype.lower() in ["armor"]:
+        print("The shop is currently selling:")
         for arm in armor.armorlist:
-            print(arm.armor_id, arm.name, "cost", arm.gold)
+            print(arm.armor_id, arm.name, ": cost", arm.gold)
         print("What would you like to buy?")
-        print("If you wish to leave, write 5")
+        print("If you wish to leave, write '100'")
         try:
             option = int(input())
         except ValueError:
@@ -72,7 +73,7 @@ def shop1():
                 print("You do not have enough money to buy the armor")
                 input("")
                 shop1()
-            elif option == "5":
+            elif option == "100":
                 return
         
     
