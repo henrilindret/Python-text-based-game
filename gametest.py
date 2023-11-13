@@ -258,6 +258,8 @@ def Combat():
 
 #########Win area####################
 
+
+
 def win():                                                
     global enemy
     print(f"You have killed the {enemy.name}")
@@ -269,16 +271,13 @@ def win():
     print("2) Move forward")
     choice = input("")                            
     
-    if choice == "1":  
-        loot.gold_drop
-        loot.lootdrop
+    if choice == "1":      
+        lootdrop = loot.random_drop_gen()
+        golddrop = loot.gold_drop_gen()
         
-        lootdrop = loot.lootdrop
-        golddrop = loot.gold_drop
-                       
-        print(f"You found",  loot.gold_drop, "gold!")
+        print(f"You found",  golddrop, "gold!")
         player.user.gold = player.user.gold + golddrop
-        
+
         if lootdrop:
             print(f"You found a {lootdrop.name} from the dead {enemy.name}!")
             input()
