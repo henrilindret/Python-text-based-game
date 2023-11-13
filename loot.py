@@ -37,25 +37,24 @@ lege_lootlist = [Titanic_arbalest, Emperors_Sword, Dark_Lance, Dragonscale_armor
 def random_drop_gen():
     rand_num = random.randint(1,100)
     
-    if rand_num <= 34:                  #30% drop chance
+    if rand_num <= 10:                  #10% drop chance
         return random.choice(common_lootlist)  
-    elif rand_num <= 40:                #14% drop chance
+    elif rand_num <= 16:                #6% drop chance
         return random.choice(rare_lootlist)
-    elif rand_num <= 45:                #5% drop chance
+    elif rand_num <= 19:                #3% drop chance
         return random.choice(epic_lootlist)
-    elif rand_num <= 46:                #1% drop chance
+    elif rand_num <= 1:                #1% drop chance
         return random.choice(lege_lootlist)
     else:
-        return None                     #50% chance for no drop
+        return None                     #80% chance for no drop
        
 lootdrop = random_drop_gen()
 
 
 def gold_drop_gen():
-    return random.randint(1,10)
+    return random.randint(1,15)
 
 gold_drop = gold_drop_gen()
-print(f"You also found {gold_drop} gold!")
 
 
 if lootdrop:
