@@ -105,8 +105,9 @@ def stats():
     print("Health:", player.user.talent.health, "/", player.user.talent.maxhealth)
     print("ManaTalent:", player.user.talent.manatalent)
     print("Attack:", player.user.Attackdamage())
-    print("Armor:", player.user.armor)
-    print("Weapon:", player.user.weapon.name)
+    print("Armor:", player.user.armor.name, "(",player.user.armorsave, "armor )")
+    print("Armor value:", player.user.Armorvalue())
+    print("Weapon:", player.user.weapon.name, "(",player.user.weapondamage, "damage )")
     print("Waves done:", player.user.waves)
     print("Gold:", player.user.gold)
     print("Current Zone:", player.user.zone)
@@ -227,7 +228,7 @@ def Combat():
         player.user.Attackdamage() // 2, player.user.Attackdamage()
     )
     enemydamage = random.randint(enemy.attack // 2, enemy.attack) - random.randint(
-        player.user.armor // 2, player.user.armor
+        player.user.armorsave // 2, player.user.armorsave
     )
     if userdamage == player.user.Attackdamage() // 2:
         print("You missed")
@@ -257,8 +258,12 @@ def Combat():
 
 #########Win area####################
 
-def win():                                                
+
+
+def win():
     global enemy
+    global healed
+
     print(f"You have killed the {enemy.name}")
     input()
     os.system("cls")
@@ -266,79 +271,80 @@ def win():
     print("What would you like to do?")
     print("1) Loot")
     print("2) Move forward")
-    choice = input("")                            
+    choice = input("")
+    os.system("cls")
     
-    if choice == "1":  
-                       
-        lootdrop = loot.random_drop_gen()
-        golddrop = loot.gold_drop_gen()
-        print(f"You found {loot.gold_drop_gen()} gold!")
-        
+    golddrop = loot.gold_drop_gen()
+    lootdrop = loot.random_drop_gen()
+
+    if choice == "1":
+        print(f"You found {golddrop} gold!")
+        player.user.gold += golddrop
+
         if lootdrop:
-            print(f"You found an {lootdrop.name}!")
-            input()
-    
             if isinstance(lootdrop, weapons.Weapon):
-                if lootdrop in weapons.lege_weaponlist:
-                    print(f"You have found a Legendary {lootdrop.name}!")
-                    print(f"You currently have a {player.user.weapon}, would you like to equip the new weapon?")
-                else:
-                    print(f"You currently have a {player.user.weapon}, would you like to equip the new weapon?")
-                    
+                print(f"You found a {lootdrop.name}! ({lootdrop.attack} damage)")
+                input()
+                os.system("cls")
+                print(f"You currently have a {player.user.weapon.name} ({player.user.weapondamage} damage): Would you like to equip the new weapon?")
             elif isinstance(lootdrop, armor.Armor):
-                if lootdrop in armor.lege_armorlist:
-                    print(f"You have found a Legendary {lootdrop.name}!")
-                    print(f"You currently have a {player.user.armor}, would you like to equip the new armor?")
-                else:
-                    print(f"You currently have a {player.user.armor}, would you like to equip the new armor?")
-                    
-            else:
-                print("This is not a recognized item type.")
-                
+                print(f"You found an {lootdrop.name}! ({lootdrop.armorsave} armor)")
+                input()
+                print(f"You currently have a {player.user.armor.name} ({player.user.armorsave} armor): Would you like to equip the new armor?")
+            
             print("1.) Equip")
             print("2.) Discard")
             
             choice = input()
+            os.system("cls")
             if choice == "1":
                 if isinstance(lootdrop, weapons.Weapon):
                     player.user.weapon = lootdrop
+                    player.user.weapondamage = lootdrop.attack
                     print(f"You have equipped the {lootdrop.name}!")
+                    input()
+                    Arriveforest()
                 elif isinstance(lootdrop, armor.Armor):
                     player.user.armor = lootdrop
+                    player.user.armorsave = lootdrop.armorsave
                     print(f"You have equipped the {lootdrop.name}!")
+                    input()
+                    Arriveforest()
                 else:
                     print("You have discarded the item.")
-                    
+                    input()
+                    Arriveforest()
+
             elif choice == "2":
                 print("You continue your exploration..")
                 input()
                 Arriveforest()
-            
+
             else:
-                print("Invalid choice.")
-        
-        player.user.waves = player.user.waves + 1            
-        enemy.health = enemy.maxhealth
-        player.user.gold = player.user.gold + golddrop
-        player.user.exp = player.user.exp + enemy.exp
-        current_talent = player.user.talent.name
-        
-        if player.user.exp >= 100 and current_talent in player.talents:
-            level_up = player.talents[current_talent].levelup
-            player.talents[current_talent].maxhealth += level_up["maxhealth"]
-            player.user.basedamage += level_up["basedamage"]
-            player.user.exp = 0
-            print("Congratulations, you leveled up!")
-        
-        if player.user.zone == "Forest":
-            Arriveforest()
-        elif player.user.zone == "Desert":
-            Arriveforest()
-        elif player.user.zone == "City":
-            print("how are you here?") 
-            
-        global healed
-        healed = 0
+                print("")
+                input()
+                Arriveforest()
+
+    player.user.waves += 1
+    enemy.health = enemy.maxhealth
+    player.user.gold += golddrop
+    player.user.exp += enemy.exp
+    current_talent = player.user.talent.name
+
+    if player.user.exp >= 100 and current_talent in player.talents:
+        level_up = player.talents[current_talent].levelup
+        player.talents[current_talent].maxhealth += level_up["maxhealth"]
+        player.user.basedamage += level_up["basedamage"]
+        player.user.exp = 0
+        print("Congratulations, you leveled up!")
+
+    if player.user.zone == "Forest" or player.user.zone == "Desert":
+        Arriveforest()  # Make sure to adjust based on your game logic
+    elif player.user.zone == "City":
+        print("How are you here?")  # Make sure to adjust based on your game logic
+
+    healed = 0
+
     
     
     

@@ -8,7 +8,7 @@ def shop1():
     print("Do you wish to check weapons or armor?")
     shoptype = input()
     
-    if shoptype.lower() in ["weapon", "weapons"]:
+    if shoptype.lower() in ["weapon", "weapons", "1"]:
         print("The shop is currently selling:")
         for wep in weapons.weaponlist:
             print(wep.weapon_id, wep.name, ": cost", wep.gold)
@@ -43,7 +43,7 @@ def shop1():
             elif option == "100":
                 return
     
-    elif shoptype.lower() in ["armor"]:
+    elif shoptype.lower() in ["armor", "2"]:
         print("The shop is currently selling:")
         for arm in armor.armorlist:
             print(arm.armor_id, arm.name, ": cost", arm.gold)
