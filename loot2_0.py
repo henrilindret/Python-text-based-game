@@ -39,28 +39,28 @@ class Zoneloot:
 
 
 
-Stick = Weapon("Stick", 2, 1, 1) 
-Dagger = Weapon("Dagger", 3, 2, 2)  
-Ironsword = Weapon("Iron sword", 5, 5, 3)  
-Steelsword = Weapon("Steel sword", 10, 10, 4)  
-Recurve_bow = Weapon("Recurve bow", 10, 15, 5) 
-Mithrilsword = Weapon("Mithril sword", 15, 25, 6)  
-Hooked_Spear = Weapon("Hooked spear", 15, 20, 7)
+Loot.lootstick = Stick = Weapon("Stick", 2, 1, 1) 
+Loot.lootdagger = Dagger = Weapon("Dagger", 3, 2, 2)  
+Loot.lootironsword = Ironsword = Weapon("Iron sword", 5, 5, 3)  
+Loot.lootsteelsword =Steelsword = Weapon("Steel sword", 10, 10, 4)  
+Loot.recurvebow = Recurve_bow = Weapon("Recurve bow", 10, 15, 5) 
+Loot.mithrilsword = Mithrilsword = Weapon("Mithril sword", 15, 25, 6)  
+Loot.hookedsepar = Hooked_Spear = Weapon("Hooked spear", 15, 20, 7)
 
-Titanic_arbalest = Weapon("Titanic arbalest", 35, 175, 8)  
-Emperors_Sword = Weapon("Emperors Sword", 60, 550, 9)  
-Dark_Lance = Weapon("Dark Lance", 100, 1000, 10)  
+Loot.titanicarbalest = Titanic_arbalest = Weapon("Titanic arbalest", 35, 175, 8)  
+Loot.emperorssword = Emperors_Sword = Weapon("Emperors Sword", 60, 550, 9)  
+Loot.darklance = Dark_Lance = Weapon("Dark Lance", 100, 1000, 10)  
 
 
-Cloth = Armor("Cloth armor", 2, 2, 11)
-Leather = Armor("Leather armor", 4, 4, 12)
-Iron = Armor("Iron armor", 10, 24, 13)
-Holy = Armor("Holy armor", 20, 74, 14)
-Shadow = Armor("Shadow armor",24, 100, 15)
+Loot.cloth = Cloth = Armor("Cloth armor", 2, 2, 11)
+Loot.leather = Leather = Armor("Leather armor", 4, 4, 12)
+Loot.iron = Iron = Armor("Iron armor", 10, 24, 13)
+Loot.holy = Holy = Armor("Holy armor", 20, 74, 14)
+Loot.shadow = Shadow = Armor("Shadow armor",24, 100, 15)
 
-Dragonscale_armor = Armor("Dragonscale armor", 34, 150, 16)
-Quicksilver_shade = Armor("Quicksilver shade", 40, 250, 17)
-Popes_garms = Armor("Pope's garms", 50, 450, 18)
+Loot.drgagonscale = Dragonscale_armor = Armor("Dragonscale armor", 34, 150, 16)
+Loot.quicksilver = Quicksilver_shade = Armor("Quicksilver shade", 40, 250, 17)
+Loot.popes = Popes_garms = Armor("Pope's garms", 50, 450, 18)
 
         
     
@@ -69,26 +69,32 @@ Popes_garms = Armor("Pope's garms", 50, 450, 18)
 
 
 
+zone_loot = Zoneloot()
 
-zoneloot = Zoneloot()
-
-zoneloot.feral_forest_loot = [Popes_garms, Holy]
-
+Zoneloot.feral_forest_loot = [Popes_garms, Holy]
 
 
+    
+    
+    
 def newloot():
-    loot_value = random.randint(1,100)
-    if loot_value <= 5:
-        loot = zone_loot_gen
-    else:
-        loot = enemy_loot_gen
+    loot_chance = random.randint(1,100)
+    if loot_chance <= 15:
+        print(" You found")
+        input()
+        
+    elif loot_chance >= 16:
+        print("you found loot")
+        input()
+    
+    
 
-
-
-
-loot1 = random.randint(1,100)
-if loot1 >= 50:
+if_loot = random.randint(1,100)
+if if_loot >= 50:
     newloot()
+else:
+    print("You found nothing of value, press any key to continue")
+    input()
 
 
     

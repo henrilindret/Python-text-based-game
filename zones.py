@@ -14,7 +14,7 @@ class Zone:
  
  
 karsrhad = Zone("Karsrhad", 0)       
-feral_forest = Zone("Feral forest", 5)
+feral_forest = Zone("Feral forest", 0)
 dune_desert = Zone("Dune desert", 10)
 lankland = Zone("Lankland", 15)
 maatincity = Zone("Maatincity", 20)
