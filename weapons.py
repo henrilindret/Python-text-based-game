@@ -10,24 +10,25 @@ class Weapon:
         
         
 
-Fist = Weapon("Scrawny fists", 1, 0, 8, 0)
+Fist = Weapon("Scrawny fists", 1, 0, 56, 0)
 Stick = Weapon("Stick", 2, 10, 1, 80) 
-Dagger = Weapon("Dagger", 3, 15, 2, 80)  
-Ironsword = Weapon("Iron sword", 5, 30, 3, 80)  
-Steelsword = Weapon("Steel sword", 10, 40, 4, 60)  
-Recurve_bow = Weapon("Recurve bow", 10, 40, 5, 60) 
-Mithrilsword = Weapon("Mithril sword", 15, 55, 6, 30)  
-Hooked_Spear = Weapon("Hooked spear", 15, 70, 7, 30)
+Dagger = Weapon("Dagger", 3, 15, 2, 80)
+Jürioda = Weapon("Jürioda", 4, 25, 3, 80) 
+Ironsword = Weapon("Iron sword", 5, 30, 4, 80)  
+Steelsword = Weapon("Steel sword", 10, 40, 5, 60)  
+Recurve_bow = Weapon("Recurve bow", 10, 40, 6, 60) 
+Mithrilsword = Weapon("Mithril sword", 15, 55, 7, 30)  
+Hooked_Spear = Weapon("Hooked spear", 15, 70, 8, 30)
 
 
-weaponlist = [Stick, Dagger, Ironsword, Steelsword, Recurve_bow, Mithrilsword, Hooked_Spear]
+weaponlist = [Stick, Dagger, Jürioda, Ironsword, Steelsword, Recurve_bow, Mithrilsword, Hooked_Spear]
 
 
 
 
-Titanic_arbalest = Weapon("Titanic arbalest", 35, 175, 8, 1)  
-Emperors_Sword = Weapon("Emperors Sword", 60, 550, 9, 1)  
-Dark_Lance = Weapon("Dark Lance", 100, 1000, 10, 1)  
+Titanic_arbalest = Weapon("Titanic arbalest", 35, 175, 9, 1)  
+Emperors_Sword = Weapon("Emperors Sword", 60, 550, 10, 1)  
+Dark_Lance = Weapon("Dark Lance", 100, 1000, 11, 1)  
 
 lege_weaponlist = [Titanic_arbalest, Emperors_Sword, Dark_Lance]
 

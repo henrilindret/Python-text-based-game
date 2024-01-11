@@ -156,7 +156,7 @@ def rest():
 
     if player.user.waves % 3 == 0:
         global healed
-        healamount = random.randint(1, 10)
+        healamount = random.randint(5, 12)
         healing = player.user.talent.health + healamount
         healthlost = player.user.talent.maxhealth - player.user.talent.health
 
@@ -182,27 +182,27 @@ def rest():
         if player.user.zone == "Forest":
             Arriveforest()
         elif player.user.zone == "Desert":
-            Arriveforest()
+            Arrivedesert()
         elif player.user.zone == "City":
             intro()  
 
 def tavern():
     os.system("cls")
     print("Welcome to the tavern!")
-    print("For only the price of 20 gold you can rest to full hp")
+    print("For only the price of 15 gold you can rest to full hp")
     print("Would you like to rest?")
     print("1.) yes")
     print("2.) no")
     option = input()
     os.system("cls")
     if option == "1":
-        if player.user.gold >= 20:
+        if player.user.gold >= 15:
             print("Sleep well!")
-            player.user.talent.health == player.user.talent.maxhealth
+            player.user.talent.health = player.user.talent.maxhealth
             player.user.gold = player.user.gold - 20
             input()
             intro()
-        elif player.user.gold < 20:
+        elif player.user.gold < 15:
             print("You do not have enough gold, better luck next time")
             input()
             intro()
@@ -220,7 +220,12 @@ def tavern():
 def fight():
     os.system("cls")
     global enemy
-    enemyencounter = random.choice(enemies.forestenemylist)
+    
+    if player.user.zone == "Forest":
+        enemyencounter = random.choice(enemies.forestenemylist)
+    elif player.user.zone == "Desert":
+        enemyencounter = random.choice(enemies.desertenemylist)
+    
     enemy = enemyencounter
     print("you encounter an", enemy.name)
     print("What would you like to do?")
@@ -239,8 +244,8 @@ def fight():
     else:
         if player.user.zone == "Forest":
             Arriveforest()
-        elif player.user.zone == "Desert WIP":
-            Arriveforest()
+        elif player.user.zone == "Desert":
+            Arrivedesert()
         elif player.user.zone == "City":
             intro()  
 
@@ -270,7 +275,7 @@ def fightcontin():
         if player.user.zone == "Forest":
             Arriveforest()
         elif player.user.zone == "Desert":
-            Arriveforest()
+            Arrivedesert()
         elif player.user.zone == "City":
             intro()  
     else:
@@ -384,27 +389,27 @@ def win():
                     player.user.weapondamage = lootdrop.attack
                     print(f"You have equipped the {lootdrop.name}!")
                     input()
-                    Arriveforest()
+                    arriveplayerzone()
                 elif isinstance(lootdrop, armor.Armor):
                     player.user.armor = lootdrop
                     player.user.armorsave = lootdrop.armorsave
                     print(f"You have equipped the {lootdrop.name}!")
                     input()
-                    Arriveforest()
+                    arriveplayerzone()
                 else:
                     print("You have discarded the item.")
                     input()
-                    Arriveforest()
+                    arriveplayerzone()
 
         elif choice == "2":
             print("You continue your exploration..")
             input()
-            Arriveforest()
+            arriveplayerzone()
 
         else:
             print("")
             input()
-            Arriveforest()
+            arriveplayerzone()
 
     player.user.waves += 1
     enemy.health = enemy.maxhealth
@@ -419,8 +424,12 @@ def win():
         player.user.exp = 0
         print("Congratulations, you leveled up!")
 
-    if player.user.zone == "Forest" or player.user.zone == "Desert":
+    if player.user.zone == "Forest":
         Arriveforest()  
+        
+    elif player.user.zone == "Desert":
+        Arrivedesert()
+        
     elif player.user.zone == "City":
         print("How are you here?") 
 
@@ -484,13 +493,19 @@ def zonepick():
     elif option == "2":
         player.user.zone = "Desert"
         print("You decide to go to the desert")
-        zonepick()
+        Arrivedesert()
+        
+def arriveplayerzone():
+    if player.user.zone == "Forest":
+        Arriveforest()
+    elif player.user.zone == "Desert":
+        Arrivedesert()
 
 
 def Arriveforest():
     os.system("cls")
     print("You arrive at a safespot in the forest")
-    print("In the Forest you can")
+    print("In the forest you can")
     print("1.) Explore")
     print("2.) Rest")
     print("3.) Stats")
@@ -517,6 +532,37 @@ def Arriveforest():
         print("Please enter a valid number")
         input()
         Arriveforest()
+        
+def Arrivedesert():
+    os.system("cls")
+    print("You arrive at an refreshing oasis in desert")
+    print("In the desert you can")
+    print("1.) Explore")
+    print("2.) Rest")
+    print("3.) Stats")
+    print("4.) Save")
+    print("5.) Return")
+    option = input("-> ")
+    if option == "1":
+        Explore()
+    elif option == "2":
+        rest()
+    elif option == "3":
+        stats()
+    elif option == "4":
+        with open("savefile", "wb") as f:
+            pickle.dump(player.user, f)
+            print("Game has been saved!")
+        option = input("")
+        Arriveforest()
+    elif option == "5":
+        intro()
+    try:
+        option = int(input())
+    except ValueError:
+        print("Please enter a valid number")
+        input()
+        Arrivedesert()
     
 def Explore():
     os.system("cls")
