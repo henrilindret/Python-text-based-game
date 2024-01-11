@@ -15,13 +15,21 @@ class Enemy:
 def Attackdamage(self):
         return self.attack
 
-wolf = Enemy("Wolf", 20, 20, 3, 2, 5, 3)
+wolf = Enemy("Wolf", 20, 20, 5, 2, 5, 3)
 troll = Enemy("Troll", 30, 30, 10, 0, 5, 10)
 goblin = Enemy("Goblin", 10, 10, 2, 1, 5, 2)
-hobgoblin = Enemy("HobGoblin", 25, 25, 5, 3, 6, 6)
-forest_fairy = Enemy("Forest Fairy", 10, 10, 5, 1, 5, 5)
+hobgoblin = Enemy("HobGoblin", 25, 25, 10, 3, 6, 6)
+forest_fairy = Enemy("Forest Fairy", 10, 10, 15, 1, 5, 5)
+maantin = Enemy("Maantin", 30, 30, 25, 10, 15, 20)
+husk = Enemy("Husk", 25, 25, 3, 2, 5, 3)
+skeleton = Enemy("Skeleton", 15, 15, 4, 1, 5, 3)
+scarab = Enemy("Scarab", 10, 10, 3, 1, 5, 5)
+repeater = Enemy("Repeater", 30, 30, 5, 3, 8, 5)
+sanddevil = Enemy("Sanddevil", 30, 30, 10, 5, 8, 10)
 
-forestenemylist = [wolf, troll, goblin, hobgoblin, forest_fairy]
+forestenemylist = [wolf, troll, goblin, hobgoblin, forest_fairy, maantin]
+
+desertenemylist = [husk, skeleton, scarab, repeater, sanddevil]
 
 
 

@@ -5,7 +5,8 @@ import armor
 import player
 
 Stick = weapons.Weapon("Stick", 2, 1, 1, 80) 
-Dagger = weapons.Weapon("Dagger", 3, 2, 2, 80)  
+Dagger = weapons.Weapon("Dagger", 3, 2, 2, 80)
+Jürioda = weapons.Weapon("Jürioda",4, 25, 3, 80)
 Ironsword = weapons.Weapon("Iron sword", 5, 5, 3, 80)  
 Steelsword = weapons.Weapon("Steel sword", 10, 10, 4, 60)  
 Recurve_bow = weapons.Weapon("Recurve bow", 10, 15, 5, 60) 
@@ -18,7 +19,7 @@ Holy = armor.Armor("Holy armor", 20, 75, 4, 30)
 Shadow = armor.Armor("Shadow armor",25, 100, 5, 30)  
 
 
-common_lootlist = [Stick, Dagger, Recurve_bow, Cloth, Leather]
+common_lootlist = [Stick, Dagger, Jürioda, Recurve_bow, Cloth, Leather]
 rare_lootlist = [Ironsword, Steelsword, Iron]
 epic_lootlist = [Mithrilsword, Hooked_Spear, Holy, Shadow]
 

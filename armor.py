@@ -8,10 +8,11 @@ class Armor:
 
 
 
-Cloth = Armor("Cloth armor", 2, 2, 1, 80)  #common
-Leather = Armor("Leather armor", 4, 4, 2, 80)  #common
-Iron = Armor("Iron armor", 10, 24, 6, 60)  #rare
-Holy = Armor("Holy armor", 20, 74, 4, 30)  #epic
+Naked = Armor("Raw skin", 1, 0, 6, 0)  #common
+Cloth = Armor("Cloth armor", 2, 10, 1, 80)  #common
+Leather = Armor("Leather armor", 4, 20, 2, 80)  #common
+Iron = Armor("Iron armor", 10, 35, 3, 60)  #rare
+Holy = Armor("Holy armor", 20, 80, 4, 30)  #epic
 Shadow = Armor("Shadow armor",24, 100, 5, 30)  #epic
 
 armorlist = [Cloth, Leather, Iron, Holy, Shadow]
