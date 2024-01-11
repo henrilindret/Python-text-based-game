@@ -1,14 +1,18 @@
 import weapons
 import player
 import armor
+import os
 
 def shop1():
     print("Welcome to the shop")
     print("You currently have", player.user.gold, "Gold")
     print("Do you wish to check weapons or armor?")
     shoptype = input()
+    os.system("clear")
     
-    if shoptype.lower() in ["weapon", "weapons"]:
+    if shoptype.lower() in ["weapon", "weapons", "1"]:
+        print("You currently have", player.user.gold, "Gold")
+        print("")
         print("The shop is currently selling:")
         for wep in weapons.weaponlist:
             print(wep.weapon_id, wep.name, ": cost", wep.gold)
@@ -43,10 +47,13 @@ def shop1():
             elif option == "100":
                 return
     
-    elif shoptype.lower() in ["armor"]:
+    elif shoptype.lower() in ["armor", "2"]:
+        print("You currently have", player.user.gold, "Gold")
+        print("")
         print("The shop is currently selling:")
         for arm in armor.armorlist:
             print(arm.armor_id, arm.name, ": cost", arm.gold)
+        print()
         print("What would you like to buy?")
         print("If you wish to leave, write '100'")
         try:
@@ -54,6 +61,7 @@ def shop1():
         except ValueError:
             print("Please enter a valid number")
             input()
+            os.system("clear")
             shop1()
             return
         
