@@ -10,6 +10,7 @@ class Weapon:
         
         
 
+Fist = Weapon("Scrawny fists", 1, 0, 8, 0)
 Stick = Weapon("Stick", 2, 1, 1, 80) 
 Dagger = Weapon("Dagger", 3, 2, 2, 80)  
 Ironsword = Weapon("Iron sword", 5, 5, 3, 80)  
