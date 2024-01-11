@@ -11,16 +11,16 @@ class Weapon:
         
 
 Fist = Weapon("Scrawny fists", 1, 0, 8, 0)
-Stick = Weapon("Stick", 2, 1, 1, 80) 
-Dagger = Weapon("Dagger", 3, 2, 2, 80)  
-Ironsword = Weapon("Iron sword", 5, 5, 3, 80)  
-Steelsword = Weapon("Steel sword", 10, 10, 4, 60)  
-Recurve_bow = Weapon("Recurve bow", 10, 15, 5, 60) 
-Mithrilsword = Weapon("Mithril sword", 15, 25, 6, 30)  
-Hooked_Spear = Weapon("Hooked spear", 15, 20, 7, 30)  
+Stick = Weapon("Stick", 2, 10, 1, 80) 
+Dagger = Weapon("Dagger", 3, 15, 2, 80)  
+Ironsword = Weapon("Iron sword", 5, 30, 3, 80)  
+Steelsword = Weapon("Steel sword", 10, 40, 4, 60)  
+Recurve_bow = Weapon("Recurve bow", 10, 40, 5, 60) 
+Mithrilsword = Weapon("Mithril sword", 15, 55, 6, 30)  
+Hooked_Spear = Weapon("Hooked spear", 15, 70, 7, 30)
 
 
-weaponlist = [Stick, Dagger, Recurve_bow, Mithrilsword, Hooked_Spear, Ironsword, Steelsword]
+weaponlist = [Stick, Dagger, Ironsword, Steelsword, Recurve_bow, Mithrilsword, Hooked_Spear]
 
 
 

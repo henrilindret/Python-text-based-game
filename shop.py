@@ -4,7 +4,7 @@ import armor
 import os
 
 def shop1():
-    os.system("clear")
+    os.system("cls")
     print("WELCOME TO THE SHOP")
     print()
     print("You currently have", player.user.gold, "Gold")
@@ -12,12 +12,10 @@ def shop1():
     print("")
     print("Press 'enter' to exit shop")
     shoptype = input()
-    os.system("clear")
+    os.system("cls")
     
     if shoptype.lower() in ["weapon", "weapons", "1"]:
-        print("You currently have", player.user.gold, "Gold")
-        print("")
-        print("The shop is currently selling:")
+        print("The shop is currently selling:    You currently have", player.user.gold, "Gold")
         for wep in weapons.weaponlist:
             print(wep.weapon_id, wep.name, ": cost", wep.gold)
         print()
@@ -28,39 +26,37 @@ def shop1():
         except ValueError:
             print("Please enter a valid number")
             input()
-            os.system("clear")
+            os.system("cls")
             shop1()
         
         for wep in weapons.weaponlist:
             if wep == player.user.weapon and option == wep.weapon_id:
-                os.system("clear")
+                os.system("cls")
                 print("You have already bought this item")
                 input("")
-                os.system("clear")
+                os.system("cls")
                 shop1()
             elif wep.weapon_id == option and player.user.gold >= wep.gold:
-                os.system("clear")
+                os.system("cls")
                 print(wep.name + " purchased")
                 player.user.gold = player.user.gold - wep.gold
                 print("You currently have", player.user.gold, "Gold left")
                 player.user.weapon = wep
                 player.user.weapondamage = wep.attack
                 input("")
-                os.system("clear")
+                os.system("cls")
                 shop1()
             elif wep.weapon_id == option and player.user.gold <= wep.gold:
-                os.system("clear")
+                os.system("cls")
                 print("You do not have enough money to buy the weapon")
                 input("")
-                os.system("clear")
+                os.system("cls")
                 shop1()
             elif option == "100":
                 return
     
     elif shoptype.lower() in ["armor", "2"]:
-        print("You currently have", player.user.gold, "Gold")
-        print("")
-        print("The shop is currently selling:")
+        print("The shop is currently selling:    You currently have", player.user.gold, "Gold")
         for arm in armor.armorlist:
             print(arm.armor_id, arm.name, ": cost", arm.gold)
         print()
@@ -69,35 +65,35 @@ def shop1():
         try:
             option = int(input())
         except ValueError:
-            os.system("clear")
+            os.system("cls")
             print("Please enter a valid number")
             input()
-            os.system("clear")
+            os.system("cls")
             shop1()
             return
         
         for arm in armor.armorlist:
             if arm == player.user.armorsave and option == arm.armor_id:
-                os.system("clear")
+                os.system("cls")
                 print("You have already bought this item")
                 input("")
-                os.system("clear")
+                os.system("cls")
                 shop1()
             elif arm.armor_id == option and player.user.gold >= arm.gold:
-                os.system("clear")
+                os.system("cls")
                 print(arm.name + " purchased")
                 player.user.gold = player.user.gold - arm.gold
                 print("You currently have", player.user.gold, "Gold left")
                 player.user.armorsave = arm.armorsave
                 player.user.armor = arm
                 input("")
-                os.system("clear")
+                os.system("cls")
                 shop1()
             elif arm.armor_id == option and player.user.gold <= arm.gold:
-                os.system("clear")
+                os.system("cls")
                 print("You do not have enough money to buy the armor")
                 input("")
-                os.system("clear")
+                os.system("cls")
                 shop1()
             elif option == "100":
                 return

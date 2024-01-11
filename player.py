@@ -8,7 +8,7 @@ class Player:
         self.talent = talents["Normal"]
         self.maxhealth = self.talent.maxhealth
         self.health = self.talent.health
-        self.gold = 50
+        self.gold = 0
         self.weapon = weapons.Fist
         self.weapondamage = self.weapon.attack
         self.basedamage = 3
@@ -19,7 +19,7 @@ class Player:
         self.level = 0
         self.exp = 0
         self.zone = ""
-        
+        self.kills = 0
 
     
     def Attackdamage(self):
