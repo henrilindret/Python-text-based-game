@@ -47,11 +47,27 @@ def random_drop_gen():
         return random.choice(lege_lootlist)
     else:
         return None                     #80% chance for no drop
+    
+    
+def boss_drop_gen():
+    rand_num = random.randint(1,100)
+    
+    if rand_num <= 50:
+        split = random.randint(1,2)
+        if split == 1:
+            return random.choice(weapons.lege_weaponlist)
+        else: 
+            return random.choice(armor.lege_armorlist)
+        
 
 
 
 def gold_drop_gen():
     return random.randint(1,15)
+
+
+def boss_gold_gen():
+    return random.randint(15,50)
 
 
 
