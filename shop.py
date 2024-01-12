@@ -15,7 +15,9 @@ def shop1():
     os.system("clear")
     
     if shoptype.lower() in ["weapon", "weapons", "1"]:
-        print("The shop is currently selling:    You currently have", player.user.gold, "Gold")
+        print("You currently have", player.user.gold, "Gold")
+        print("")
+        print("The shop is currently selling:")
         for wep in weapons.weaponlist:
             print(wep.weapon_id, wep.name, ": cost", wep.gold)
         print()
@@ -56,7 +58,9 @@ def shop1():
                 return
     
     elif shoptype.lower() in ["armor", "2"]:
-        print("The shop is currently selling:    You currently have", player.user.gold, "Gold")
+        print("You currently have", player.user.gold, "Gold")
+        print("")
+        print("The shop is currently selling:")
         for arm in armor.armorlist:
             print(arm.armor_id, arm.name, ": cost", arm.gold)
         print()
