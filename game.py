@@ -465,7 +465,7 @@ def reset_stats():
     player.user.talent.health = player.user.health
     player.user.maxhealth = 0 + player.user.maxhealth 
     player.user.exp = 0
-    player.user.gold = 50
+    player.user.gold = 0
     player.user.weapon = weapons.Fist
     player.user.weapondamage = player.user.weapon.attack
     player.user.armor = armor.Naked
