@@ -20,8 +20,11 @@ troll = Enemy("Troll", 30, 30, 10, 0, 5, 10)
 goblin = Enemy("Goblin", 10, 10, 2, 1, 5, 2)
 hobgoblin = Enemy("HobGoblin", 25, 25, 5, 3, 6, 6)
 forest_fairy = Enemy("Forest Fairy", 10, 10, 5, 1, 5, 5)
+kneecrawler = Enemy("Kneecrawler", 100, 100, 35, 20, 25, 10)
 
 forestenemylist = [wolf, troll, goblin, hobgoblin, forest_fairy]
+
+forestbosslist = [kneecrawler]
 
 
 
