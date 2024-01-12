@@ -9,16 +9,6 @@ import player
 import loot
 import armor
 import weapons
-import ctypes
-
-
-def set_console_title(title):
-    ctypes.windll.kernel32.SetConsoleTitleW(title)
-    
-if __name__ == "__main__":
-    new_title = "Age of Lindret"
-    set_console_title(new_title)
-
 
 healed = 0
 
