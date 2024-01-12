@@ -16,7 +16,6 @@ healed = 0
 ###########Start/talent############################
 
 def main():
-    os.system("cls")
     print("Welcome to the dungeon")
     print("1.) Start")
     print("2.) Load")
@@ -33,14 +32,14 @@ def main():
             option = input("")
             intro()
     elif option == "3":
-        os.system("cls")
+
         print("1.) Not sure what to do? Press 'ENTER'")
         print()
         print("2.) Most of the times you can write either '1' or '2' instead of the full word")
         print()
         print("Press 'ENTER' to return to menu")
         input()
-        os.system("cls")
+
         main()
         
     elif option == "4":
@@ -54,10 +53,8 @@ def main():
 
 
 def start():
-    os.system("cls")
     print("What is your name?")
     player.user.name = input("")
-    os.system("cls")
     talentpick()
 
 
@@ -74,14 +71,14 @@ def talentpick():
         player.user.talent = player.talents["Paladin"]
         player.user.health = player.user.talent.health
     elif talent != "Warrior" or "Paladin":
-        os.system("cls")
+
         print("You have not chosen a talent, do you wish to have no talent?")
         decision = input("")
         if decision == "yes":
             player.user.talent = player.talents["Normal"]
             player.user.health = player.user.talent.health
         elif decision == "no" or "" or " ":
-            os.system("cls")
+    
             talentpick()
     intro()
 
@@ -90,7 +87,7 @@ def talentpick():
 
 def intro():
     while True:
-        os.system("cls")
+
         player.user.zone = "City"
         print("You arrive in the city of Karshrad, Would you like to")
         print("1.) Go outside the city")
@@ -101,7 +98,7 @@ def intro():
         print("6.) Go to the Tavern")
         print("7.) Exit")
         option = input("-> ")
-        os.system("cls")
+
         if option == "1":
             zonepick()
         elif option == "2":
@@ -124,7 +121,6 @@ def intro():
 ##############Stats#####################################
 
 def stats():
-    os.system("cls")
     enemieskilled = 0
     print("Name:", player.user.name)
     print("Experience:", player.user.exp)
@@ -152,7 +148,6 @@ def stats():
 ##############Healing#####################################
 
 def rest():
-    os.system("cls")
 
     if player.user.waves % 3 == 0:
         global healed
@@ -187,14 +182,12 @@ def rest():
             intro()  
 
 def tavern():
-    os.system("cls")
     print("Welcome to the tavern!")
     print("For only the price of 15 gold you can rest to full hp")
     print("Would you like to rest?")
     print("1.) yes")
     print("2.) no")
     option = input()
-    os.system("cls")
     if option == "1":
         if player.user.gold >= 15:
             print("Sleep well!")
@@ -218,7 +211,6 @@ def tavern():
 ##############Combat Area################################
 
 def fight():
-    os.system("cls")
     global enemy
     
     if player.user.zone == "Forest":
@@ -227,19 +219,18 @@ def fight():
         enemyencounter = random.choice(enemies.desertenemylist)
     
     enemy = enemyencounter
-    print("you encounter an", enemy.name)
+    print("you encounter an", enemy.name, "and he has", enemy.health , "/" , enemy.maxhealth , "health")
     print("What would you like to do?")
     print("1.) Attack")
     print("2.) Use spell WIP")
     print("3.) Run away")
     option = input("-> ")
-    os.system("cls")
     if option == "1":
         Combat()
     elif option == "2":
         print("WIP")
         input()
-        os.system("cls")
+
         fightcontin()
     else:
         if player.user.zone == "Forest":
@@ -250,7 +241,8 @@ def fight():
             intro()  
 
 def fightcontin():
-    
+    print("The enemy has", enemy.health, "/", enemy.maxhealth , "health left")
+    print("You have", player.user.talent.health,  "/", player.user.talent.maxhealth, "health left")
     print("Do you wish to continue fighting", enemy.name)
     print("What would you like to do?")
     print("1.) Attack")
@@ -258,16 +250,15 @@ def fightcontin():
     print("3.) Use Item WIP")
     print("4.) Run away")
     option = input("-> ")
-    os.system("cls")
     if option == "1":
-        os.system("cls")
+
         Combat()
     elif option == "2":
         print("no")
     elif option == "3":
         print("WIP")
         input()
-        os.system("cls")
+
         fightcontin()
     elif option == "4":
         print(f"{enemy.name}: KUHU SA JOOKSED ARGGGG!!!")
@@ -288,50 +279,36 @@ def Combat():
     enemydamage = random.randint(enemy.attack // 2, enemy.attack) - random.randint(
         player.user.armorsave // 2, player.user.armorsave
     )
+    print("You run and attack the enemy")
+    
     if userdamage == player.user.Attackdamage() // 2:
         print("You missed")
         print()
         input("'ENTER' to continue")
-        os.system("cls")
     else:
-        print(enemy.name, "has", enemy.health, "health left")
-        print()
-        input("'ENTER' to continue")
-        os.system("cls")
         print("You hit", enemy.name, "for", userdamage)
         enemy.health = max(0, enemy.health - userdamage)
         print()
         input("'ENTER' to continue")
-        os.system("cls")
     if enemy.health <= 0:
         win()
     if enemydamage == enemy.attack // 2:
         print("The enemy missed their attack")
         print()
         input("'ENTER' to continue")
-        os.system("cls")
     elif enemydamage <= 0:
         print("Your armor helped block")
         print()
         input("'ENTER' to continue")
-        os.system("cls")
     else:
         player.user.talent.health -= enemydamage
         print(enemy.name, "hit you for", enemydamage)
         print()
         input("'ENTER' to continue")
-        os.system("cls")
     if player.user.talent.health <= 0:
         print("You have been killed")
         input()
-        os.system("cls")
         dead()
-    elif player.user.talent.health > 0:
-        print("You have", player.user.talent.health, "health left")
-        print()
-        input("'ENTER' to continue")
-        os.system("cls")
-        fightcontin()
     else:
         fightcontin()
 
@@ -344,20 +321,17 @@ def Combat():
 
 
 def win():
-    os.system("cls")
     global enemy
     global healed
 
     print(f"You have killed the {enemy.name}")
     player.user.kills += 1
     input()
-    os.system("cls")
 
     print("What would you like to do?")
     print("1) Loot")
     print("2) Move forward")
     choice = input("")
-    os.system("cls")
     
     golddrop = loot.gold_drop_gen()
     lootdrop = loot.random_drop_gen()
@@ -371,7 +345,7 @@ def win():
             if isinstance(lootdrop, weapons.Weapon):
                 print(f"You found a {lootdrop.name}! ({lootdrop.attack} damage)")
                 input()
-                os.system("cls")
+        
                 print(f"You currently have a {player.user.weapon.name} ({player.user.weapondamage} damage): Would you like to equip the new weapon?")
             elif isinstance(lootdrop, armor.Armor):
                 print(f"You found an {lootdrop.name}! ({lootdrop.armorsave} armor)")
@@ -382,7 +356,7 @@ def win():
             print("2.) Discard")
             
             choice = input()
-            os.system("cls")
+    
             if choice == "1":
                 if isinstance(lootdrop, weapons.Weapon):
                     player.user.weapon = lootdrop
@@ -443,7 +417,6 @@ def win():
 #########Dead area####################
     
 def dead():
-    os.system("cls")
     print("You have died")
     print("Do you want to start over?")
     print("1.) yes")
@@ -481,7 +454,6 @@ def reset_stats():
 ##############Zone Area################################
 
 def zonepick():
-    os.system("cls")
     print("Outside the city you have different zones you can go to")
     print("1.) Forest")
     print("2.) Desert")
@@ -503,7 +475,6 @@ def arriveplayerzone():
 
 
 def Arriveforest():
-    os.system("cls")
     print("You arrive at a safespot in the forest")
     print("In the forest you can")
     print("1.) Explore")
@@ -534,7 +505,6 @@ def Arriveforest():
         Arriveforest()
         
 def Arrivedesert():
-    os.system("cls")
     print("You arrive at an refreshing oasis in desert")
     print("In the desert you can")
     print("1.) Explore")
@@ -565,7 +535,6 @@ def Arrivedesert():
         Arrivedesert()
     
 def Explore():
-    os.system("cls")
     print("You decide to explore around")
     Event = random.randint(1, 100)
     if Event >= 10:
@@ -580,12 +549,12 @@ def Explore():
         print("2.) Rest near it")
         print("3.) Ignore it and leave")
         option = input("")
-        os.system("cls")
+
         if option == "1":
             print("You decide to drink from the well and continue on your way")
-            player.user.health = player.user.health + 10
-            if player.user.health >= player.user.maxhealth:
-                player.user.health = player.user.maxhealth
+            player.user.talent.health = player.user.talent.health + 10
+            if player.user.talent.health >= player.user.talent.maxhealth:
+                player.user.talent.health = player.user.talent.maxhealth
             input()
             Explore()
         elif option == "2":
