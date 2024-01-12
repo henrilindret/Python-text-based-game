@@ -251,9 +251,11 @@ def rest():
         if healed == 1:
             print("you have already healed once")
             input()
+            Arriveplayerzone()
         elif player.user.talent.health == player.user.talent.maxhealth:
             print("You are at max hp and cannot heal")
             input()
+            Arriveplayerzone()
         elif player.user.talent.health < player.user.talent.maxhealth:
             player.user.talent.health = healing
             healed = healed + 1
@@ -277,27 +279,27 @@ def rest():
 def tavern():
     os.system("cls")
     print("Welcome to the tavern!")
-    print("For only the price of 20 gold you can rest to full hp")
+    print("For only the price of 15 gold you can rest to full hp")
     print("Would you like to rest?")
     print("1.) yes")
     print("2.) no")
     option = input()
     os.system("cls")
     if option == "1":
-        if player.user.gold >= 20:
+        if player.user.gold >= 15:
             print("Sleep well!")
             player.user.talent.health = player.user.talent.maxhealth
-            player.user.gold = player.user.gold - 20
+            player.user.gold = player.user.gold - 15
             input()
-            intro()
-        elif player.user.gold < 20:
+            Arriveplayerzone()
+        elif player.user.gold < 15:
             print("You do not have enough gold, better luck next time")
             input()
-            intro()
+            Arriveplayerzone()
     elif option == "2":
         print("go away then")
         input()
-        intro()
+        Arriveplayerzone()
     else:
         tavern()
         
@@ -325,14 +327,20 @@ def fight():
     if option == "1":
         Combat()
     elif option == "2":
-        print("no")
-    else:
+        print("not work")
+        input()
+        os.system("cls")
+        Combat()
+    elif option == "3":
         if player.user.zone == "Forest":
             Arriveplayerzone()
         elif player.user.zone == "Desert":
             Arrivedesert()
         elif player.user.zone == "City":
             intro()
+    else:
+        Combat()
+        
             
             
 def bossfight():
@@ -375,10 +383,15 @@ def bossfight():
             os.system("cls")
             print("The", enemy.name, "lacerated you while you tried to escape, causing", escapedam, "damage")
             print("")
-            print("You now have", player.user.talent.health, "/", player.user.talent.maxhealth, "health left")
             input()
             os.system("cls")
-            fightcontin()
+            if player.user.talent.health <= 0:
+                dead()
+            else:
+                print("You now have", max(0,player.user.talent.health), "/", player.user.talent.maxhealth, "health left")
+                input()
+                os.system("cls")
+                fightcontin()
     elif player.user.zone == "Forest":
         Arriveforest()
     elif player.user.zone == "Desert":
@@ -485,7 +498,7 @@ def Combat():
 
 
 
-
+##############Combat Area################################
 
 #########Win area####################
 
@@ -614,12 +627,13 @@ def dead():
 def reset_stats():
     global healed
     global player
-    
+    healed = 0
+
     player.user.name = ""
-    player.user.talent.health = player.user.health
-    player.user.maxhealth = 0 + player.user.maxhealth 
+    player.user.talent.health = player.user.talent.maxhealth
+    player.user.talent.maxhealth = 0 + player.user.talent.maxhealth 
     player.user.exp = 0
-    player.user.gold = 50
+    player.user.gold = 0
     player.user.weapon = weapons.Fist
     player.user.weapondamage = player.user.weapon.attack
     player.user.armor = armor.Naked
