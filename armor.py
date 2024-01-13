@@ -8,9 +8,10 @@ class Armor:
 
 
 
+Naked = Armor("Raw skin", 1, 0, 6, 0)  #common
 Cloth = Armor("Cloth armor", 2, 2, 1, 80)  #common
 Leather = Armor("Leather armor", 4, 4, 2, 80)  #common
-Iron = Armor("Iron armor", 10, 24, 6, 60)  #rare
+Iron = Armor("Iron armor", 10, 24, 3, 60)  #rare
 Holy = Armor("Holy armor", 20, 74, 4, 30)  #epic
 Shadow = Armor("Shadow armor",24, 100, 5, 30)  #epic
 
