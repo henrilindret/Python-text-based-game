@@ -18,7 +18,7 @@ Ironsword = Weapon("Iron sword", 12, 35, 4, 80)
 Steelsword = Weapon("Steel sword", 15, 45, 5, 60)  
 Recurve_bow = Weapon("Recurve bow", 13, 45, 6, 60) 
 Mithrilsword = Weapon("Mithril sword", 18, 50, 7, 30)  
-Hooked_Spear = Weapon("Hooked spear", 25, 65, 8, 30)  
+Hooked_Spear = Weapon("Hooked spear", 25, 65, 8, 30) 
 
 
 weaponlist = [Stick, Dagger, Jürioda, Ironsword, Steelsword, Recurve_bow, Mithrilsword]
@@ -28,8 +28,9 @@ weaponlist = [Stick, Dagger, Jürioda, Ironsword, Steelsword, Recurve_bow, Mithr
 
 Titanic_arbalest = Weapon("Titanic arbalest", 35, 175, 9, 1)  
 Emperors_Sword = Weapon("Emperors Sword", 60, 550, 10, 1)  
-Dark_Lance = Weapon("Dark Lance", 100, 1000, 11, 1)  
+Dark_Lance = Weapon("Dark Lance", 100, 1000, 11, 1)
+Pawablade = Weapon("Pawablade", 75, 800, 12,  1)
 
-lege_weaponlist = [Titanic_arbalest, Emperors_Sword, Dark_Lance]
+lege_weaponlist = [Titanic_arbalest, Emperors_Sword, Dark_Lance, Pawablade]
 
 

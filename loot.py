@@ -6,7 +6,8 @@ import player
 
 Stick = weapons.Weapon("Stick", 2, 1, 1, 80) 
 Dagger = weapons.Weapon("Dagger", 3, 2, 2, 80)  
-Ironsword = weapons.Weapon("Iron sword", 5, 5, 3, 80)  
+Ironsword = weapons.Weapon("Iron sword", 5, 5, 3, 80)
+Jürioda = weapons.Weapon("Jürioda", 7, 25, 3, 80) 
 Steelsword = weapons.Weapon("Steel sword", 10, 10, 4, 60)  
 Recurve_bow = weapons.Weapon("Recurve bow", 10, 15, 5, 60) 
 Mithrilsword = weapons.Weapon("Mithril sword", 15, 25, 6, 30)  
@@ -18,7 +19,7 @@ Holy = armor.Armor("Holy armor", 20, 75, 4, 30)
 Shadow = armor.Armor("Shadow armor",25, 100, 5, 30)  
 
 
-common_lootlist = [Stick, Dagger, Recurve_bow, Cloth, Leather]
+common_lootlist = [Stick, Dagger, Jürioda, Recurve_bow, Cloth, Leather]
 rare_lootlist = [Ironsword, Steelsword, Iron]
 epic_lootlist = [Mithrilsword, Hooked_Spear, Holy, Shadow]
 
@@ -35,18 +36,18 @@ lege_lootlist = [Titanic_arbalest, Emperors_Sword, Dark_Lance, Dragonscale_armor
 
 
 def random_drop_gen():
-    rand_num = random.randint(1,100)
+    rand_num = random.randint(1,1000)
     
-    if rand_num <= 10:                  #10% drop chance
+    if rand_num <= 100:                       #10%
         return random.choice(common_lootlist)  
-    elif rand_num <= 16:                #6% drop chance
+    elif rand_num <= 150:                     #5%
         return random.choice(rare_lootlist)
-    elif rand_num <= 19:                #3% drop chance
+    elif rand_num <= 180:                     #3%
         return random.choice(epic_lootlist)
-    elif rand_num <= 20:                #1% drop chance
+    elif rand_num <= 185:                     #0.5%
         return random.choice(lege_lootlist)
     else:
-        return None                     #80% chance for no drop
+        return None                     
     
     
 def boss_drop_gen():
