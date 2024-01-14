@@ -22,7 +22,7 @@ class Player:
         self.xp = 0
         self.maxp = 100
         self.zone = ""
-        self.kills = 0
+        self.kills = 1
         self.bosskills = 0
         self.revive = 0
         self.merchantpay = 0
