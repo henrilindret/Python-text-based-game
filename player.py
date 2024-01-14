@@ -18,7 +18,7 @@ class Player:
         self.basearmor = 0
         self.waves = 0
         self.rest = 0
-        self.level = 0
+        self.level = 1
         self.xp = 0
         self.maxp = 100
         self.zone = ""
