@@ -15,7 +15,7 @@ class Player:
         self.armor = armor.Cloth.armor
         self.waves = 0
         self.rest = 0
-        self.level = 0
+        self.level = 1
         self.exp = 0
         self.zone = ""
         
