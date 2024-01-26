@@ -1,25 +1,26 @@
 class Armor:
-    def __init__(self, name, armor, gold, armor_id, drop_chance):
+    def __init__(self, name, armorsave, gold, armor_id, drop_chance):
         self.name = name
-        self.armor = armor
+        self.armorsave = armorsave
         self.gold = gold
         self.armor_id = armor_id
         self.drop_chance = drop_chance
 
 
 
-Cloth = Armor("Cloth armor", 5, 5, 1, 80)  #common
-Leather = Armor("Leather armor", 5, 10, 2, 80)  #common
-Iron = Armor("Iron armor", 10, 25, 3, 60)  #rare
-Holy = Armor("Holy armor", 20, 75, 4, 30)  #epic
-Shadow = Armor("Shadow armor",25, 100, 5, 30)  #epic
+Naked = Armor("Raw skin", 1, 0, 6, 0)  
+Cloth = Armor("Cloth armor", 5, 15, 1, 80)  
+Leather = Armor("Leather armor", 10, 25, 2, 80)  
+Iron = Armor("Iron armor", 15, 35, 3, 60)  
+Holy = Armor("Holy armor", 25, 55, 4, 30)  
+Shadow = Armor("Shadow armor",30, 70, 5, 30)
 
 armorlist = [Cloth, Leather, Iron, Holy, Shadow]
 
 
 #legendary armor, boss drop only
 
-Dragonscale_armor = Armor("Dragonscale armor", 35, 150, 6, 5)  #legendary
+Dragonscale_armor = Armor("Dragonscale armor", 34, 150, 6, 5)  #legendary
 Quicksilver_shade = Armor("Quicksilver shade", 40, 250, 7, 5)  #legendary
 Popes_garms = Armor("Pope's garms", 50, 450, 8, 5)  #legendary
 

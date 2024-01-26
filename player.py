@@ -1,53 +1,81 @@
 import weapons
 import armor
+import random
 
 
 class Player:
     def __init__(self):
         self.name = ""
-        self.talent = talents["Normal"]
+        self.talent = normal
         self.maxhealth = self.talent.maxhealth
         self.health = self.talent.health
-        self.gold = 50
-        self.weapon = weapons.Ironsword
+        self.gold = 15000
+        self.weapon = weapons.Fist
         self.weapondamage = self.weapon.attack
-        self.basedamage = 3
-        self.armor = armor.Cloth.armor
+        self.magicdamage = 0
+        self.basedamage = 0
+        self.armor = armor.Naked
+        self.armorsave = self.armor.armorsave
+        self.mana = self.talent.mana
+        self.maxmana = self.talent.maxmana
+        self.basearmor = 0
         self.waves = 0
         self.rest = 0
         self.level = 1
-        self.exp = 0
+        self.spelllevel = self.talent.magiclevel
+        self.xp = 0
+        self.maxp = 100
         self.zone = ""
+        self.kills = 0
+        self.bosskills = 0
+        self.revive = 0
+        self.merchantpay = 0
+        self.spelllist = self.talent.known_spells
         
-
-    
     def Attackdamage(self):
         return self.basedamage + self.weapondamage + self.talent.attack
     
-
+    def Armorvalue(self):
+        return self.basearmor + self.armorsave + self.talent.armorsum
     
-
+    def Magicattackdamage(self):
+        return self.magicdamage + self.talent.magicattack + self.basedamage
+    
+    def Magicarmorvalue(self):
+        return self.armorsave + self.talent.armorsum + self.basearmor
+    
+    
 class Talent:
-    def __init__(self, name, attack, maxhealth, health, mana, manatalent, levelup):
+    def __init__(self, name, attack, magicattack, health, maxhealth, armorsum, mana, maxmana, magiclevel, lvlupattack, lvluparmor, lvluphealth,):
         self.name = name
         self.attack = attack
-        self.maxhealth = maxhealth
+        self.magicattack = magicattack
         self.health = health
+        self.maxhealth = maxhealth
+        self.armorsum = armorsum
         self.mana = mana
-        self.manatalent = manatalent
-        self.levelup = levelup
+        self.maxmana = maxmana
+        self.magiclevel = magiclevel
+        self.lvlupattack = lvlupattack
+        self.lvluparmor = lvluparmor
+        self.lvluphealth = lvluphealth
+        self.known_spells = []
 
 
-talents = {
-    "Warrior": Talent("Warrior", attack=4, maxhealth=110, health=110, mana=50, manatalent=1, levelup={"maxhealth": 30, "basedamage": 3}),
-    "Paladin": Talent("Paladin", attack=2, maxhealth=150, health=150, mana=100, manatalent=2, levelup={"maxhealth": 40, "basedamage": 2}),
-    "Normal": Talent("Normal", attack=0, maxhealth=100, health=100, mana=100, manatalent=1, levelup={"maxhealth": 20, "basedamage": 2}),
-}
+
+warrior = Talent("Warrior", 4, 0, 45, 45, 6, 100, 100, 1, random.randint(3,5), random.randint(1,3), random.randint(5,10))
+paladin = Talent("Paladin", 2, 5, 50, 50, 4, 150, 150, 2, random.randint(1,3), random.randint(2,5), random.randint(5,10))
+assassin = Talent("Assassin", 10, 2, 25, 25, 2, 100, 100, 1, random.randint(4,8), random.randint(1,2), random.randint(1,5))
+normal = Talent("Normal", 0, 2, 40, 40, 2, 150, 150, 1, random.randint(3,5), random.randint(1,3), random.randint(5,10))
+
+    
+    
+
+user = Player()
+
+
 
     
 
 
-
-
-user = Player()
 
